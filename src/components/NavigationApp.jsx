@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchInput from './SearchInput'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
-function NavigationApp({ onSearch, searchKeyword }) {
+function NavigationApp() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const keyword = searchParams.get('keyword')
+
+  const searchInputEventHandler = (event) => {
+    const value = event.target.value
+    setSearchParams({ keyword: value })
+  }
+
   return (
     <div className='note-app__header'>
       <h1>
@@ -12,7 +20,7 @@ function NavigationApp({ onSearch, searchKeyword }) {
       <nav>
         <Link to='/archive'>Arsip</Link>
       </nav>
-      <SearchInput onSearch={onSearch} keyword={searchKeyword} />
+      <SearchInput onSearch={searchInputEventHandler} keyword={keyword} />
     </div>
   )
 }
