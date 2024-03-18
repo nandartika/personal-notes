@@ -86,11 +86,6 @@ class NoteApp extends React.Component {
   render() {
     return (
       <>
-        <NavigationApp
-          onSearch={this.searchInputEventHandler}
-          searchKeyword={this.state.searchKeyword}
-        />
-
         <div className='note-app__body'>
           <NoteForm addNote={this.onAddContactHandler} />
 
