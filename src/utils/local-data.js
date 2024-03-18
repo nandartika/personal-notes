@@ -41,77 +41,94 @@ let notes = [
     createdAt: '2022-04-14T04:27:34.572Z',
     archived: false,
   },
-];
+]
 
 function getAllNotes() {
-  return notes;
+  return notes
 }
 
 function getNote(id) {
-  const foundedNote = notes.find((note) => note.id === id);
-  return foundedNote;
+  const foundedNote = notes.find((note) => note.id === id)
+  return foundedNote
+}
+
+function getNoteByKeyword(notes, keyword) {
+  const keywordLowerCase = keyword.toLowerCase()
+  const filteredNotes = notes.filter((note) => {
+    const titleLowerCase = note.title.toLowerCase()
+    return titleLowerCase.includes(keywordLowerCase)
+  })
+  return filteredNotes
 }
 
 function getActiveNotes() {
-  const activeNotes = notes.filter((note) => !note.archived);
-  return activeNotes;
+  const activeNotes = notes.filter((note) => !note.archived)
+  return activeNotes
 }
 
 function getArchivedNotes() {
-  const archivedNotes = notes.filter((note) => note.archived);
-  return archivedNotes;
+  const archivedNotes = notes.filter((note) => note.archived)
+  return archivedNotes
 }
 
 function addNote({ title, body }) {
-  notes = [...notes, {
-    id: `notes-${+new Date()}`, title: title || '(untitled)', body, createdAt: new Date().toISOString(), archived: false,
-  }];
+  notes = [
+    ...notes,
+    {
+      id: `notes-${+new Date()}`,
+      title: title || '(untitled)',
+      body,
+      createdAt: new Date().toISOString(),
+      archived: false,
+    },
+  ]
 }
 
 function deleteNote(id) {
-  notes = notes.filter((note) => note.id !== id);
+  notes = notes.filter((note) => note.id !== id)
 }
 
 function archiveNote(id) {
   notes = notes.map((note) => {
     if (note.id === id) {
-      return { ...note, archived: true };
+      return { ...note, archived: true }
     }
-    return note;
-  });
+    return note
+  })
 }
 
 function unarchiveNote(id) {
   notes = notes.map((note) => {
     if (note.id === id) {
-      return { ...note, archived: false };
+      return { ...note, archived: false }
     }
 
-    return note;
-  });
+    return note
+  })
 }
 
 function editNote({ id, title, body }) {
-  const noteToEdit = notes.find((note) => note.id === id);
-  noteToEdit.title = title;
-  noteToEdit.body = body;
+  const noteToEdit = notes.find((note) => note.id === id)
+  noteToEdit.title = title
+  noteToEdit.body = body
 
   notes = notes.map((note) => {
     if (note.id === id) {
-      return note;
+      return note
     }
-    return note;
-  });
+    return note
+  })
 }
 
 export {
   getAllNotes,
   getActiveNotes,
   getArchivedNotes,
+  getNoteByKeyword,
   deleteNote,
   editNote,
   getNote,
   archiveNote,
   unarchiveNote,
   addNote,
-};
+}
