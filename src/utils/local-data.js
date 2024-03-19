@@ -52,11 +52,13 @@ function getNote(id) {
   return foundedNote
 }
 
-function getNoteByKeyword(notes, keyword) {
+function getNoteByKeyword(notes, keyword, isArchived) {
   const keywordLowerCase = keyword.toLowerCase()
   const filteredNotes = notes.filter((note) => {
     const titleLowerCase = note.title.toLowerCase()
-    return titleLowerCase.includes(keywordLowerCase)
+    return (
+      titleLowerCase.includes(keywordLowerCase) && note.archived === isArchived
+    )
   })
   return filteredNotes
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { addNote } from '../utils/local-data'
 
 class NoteForm extends React.Component {
   constructor(props) {
@@ -29,8 +30,9 @@ class NoteForm extends React.Component {
   }
 
   onSubmitEventHandler(event) {
-      event.preventDefault()
-      this.props.addNote(this.state)
+    event.preventDefault()
+    console.log(this.state)
+    addNote(this.state)
   }
 
   render() {
