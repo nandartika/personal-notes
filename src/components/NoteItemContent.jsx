@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { showFormattedDate } from '../utils'
 
 function NoteItemContent({ title, createdAt, body }) {
@@ -9,6 +10,12 @@ function NoteItemContent({ title, createdAt, body }) {
       <p className='note-item__body'>{body}</p>
     </div>
   )
+}
+
+NoteItemContent.propTypes = {
+  title: PropTypes.string,
+  createdAt: PropTypes.string,
+  body: PropTypes.string,
 }
 
 export default NoteItemContent
