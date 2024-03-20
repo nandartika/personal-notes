@@ -1,14 +1,18 @@
-import React from 'react'
-import NavigationApp from '../components/NavigationApp'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import NavigationApp from "../components/NavigationApp";
+import { Outlet } from "react-router-dom";
 
 function MainContainer() {
   return (
     <>
-      <NavigationApp />
-      <Outlet />
+      <header>
+        <NavigationApp />
+      </header>
+      <main>
+        <Outlet />
+      </main>
     </>
-  )
+  );
 }
 
-export default MainContainer
+export default MainContainer;

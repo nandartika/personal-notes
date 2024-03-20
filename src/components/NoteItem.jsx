@@ -13,6 +13,7 @@ function NoteItem({ note, onDelete, onArchiveMove }) {
         title={note.title}
         createdAt={note.createdAt}
         body={note.body}
+        id={note.id}
       />
 
       <div className='note-item__action'>
