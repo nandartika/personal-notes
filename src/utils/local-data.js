@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 let notes = [
   {
     id: 'notes-1',
@@ -133,4 +135,12 @@ export {
   archiveNote,
   unarchiveNote,
   addNote,
+}
+
+export const notePropTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string,
+  createdAt: PropTypes.string.isRequired,
+  archived: PropTypes.bool.isRequired,
 }

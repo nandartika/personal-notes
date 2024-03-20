@@ -1,7 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import NoteItemContent from './NoteItemContent'
 import DeleteButton from './DeleteButton'
 import ArchivedMoveButton from './ArchivedMoveButton'
+import { notePropTypes } from '../utils/local-data'
 
 function NoteItem({ note, onDelete, onArchiveMove }) {
   return (
@@ -22,6 +25,12 @@ function NoteItem({ note, onDelete, onArchiveMove }) {
       </div>
     </div>
   )
+}
+
+NoteItem.propTypes = {
+  note: PropTypes.shape(notePropTypes).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchiveMove: PropTypes.func.isRequired,
 }
 
 export default NoteItem
