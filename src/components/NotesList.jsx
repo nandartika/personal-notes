@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import NoteItem from './NoteItem'
+import { notePropTypes } from '../utils/local-data'
 
 function NotesList({ notes, onDelete, onArchiveMove }) {
   return notes.length === 0 ? (
@@ -19,10 +20,11 @@ function NotesList({ notes, onDelete, onArchiveMove }) {
   )
 }
 
+NotesList.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.shape(notePropTypes)).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchiveMove: PropTypes.func.isRequired,
+}
+
 export default NotesList
 
-// NoteList.propTypes = {
-//   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   onDelete: PropTypes.func.isRequired,
-//   onArchived: PropTypes.func.isRequired,
-// }
