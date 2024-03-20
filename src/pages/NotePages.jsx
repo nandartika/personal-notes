@@ -6,7 +6,6 @@ import {
   deleteNote,
   getActiveNotes,
   getArchivedNotes,
-  getNote,
   getNoteByKeyword,
   unarchiveNote,
 } from '../utils/local-data'

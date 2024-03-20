@@ -16,7 +16,7 @@ function NoteItem({ note, onDelete, onArchiveMove }) {
         <DeleteButton onDelete={onDelete} id={note.id} />
         <ArchivedMoveButton
           onArchiveMove={onArchiveMove}
-          isArchived={note.isArchived}
+          isArchived={note.archived}
           id={note.id}
         />
       </div>
