@@ -14,6 +14,9 @@ function NavigationApp() {
             <Link to='/add-note'>Add Note</Link>
           </li>
           <li>
+            <Link to='/notes/active'>Daftar Note</Link>
+          </li>
+          <li>
             <Link to='/notes/archived'>Arsip</Link>
           </li>
         </ul>

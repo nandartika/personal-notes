@@ -1,14 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import NoteItem from './NoteItem'
 
-function NotesList({ notes, onDelete, onArchiveMove, isArchived = false }) {
-  const filteredNotes = notes.filter((note) => note.archived == isArchived)
-
-  return filteredNotes.length === 0 ? (
+function NotesList({ notes, onDelete, onArchiveMove }) {
+  return notes.length === 0 ? (
     <p className='notes-list__empty-message'>Tidak ada catatan</p>
   ) : (
     <div className='notes-list'>
-      {filteredNotes.map((note) => (
+      {notes.map((note) => (
         <NoteItem
           key={note.id}
           note={note}
@@ -21,3 +20,9 @@ function NotesList({ notes, onDelete, onArchiveMove, isArchived = false }) {
 }
 
 export default NotesList
+
+// NoteList.propTypes = {
+//   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   onDelete: PropTypes.func.isRequired,
+//   onArchived: PropTypes.func.isRequired,
+// }

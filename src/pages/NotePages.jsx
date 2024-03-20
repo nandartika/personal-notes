@@ -2,9 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useSearchParams, useParams } from 'react-router-dom'
 import {
+  archiveNote,
+  deleteNote,
   getActiveNotes,
   getArchivedNotes,
+  getNote,
   getNoteByKeyword,
+  unarchiveNote,
 } from '../utils/local-data'
 import NotesList from '../components/NotesList'
 import SearchInput from '../components/SearchInput'
@@ -34,10 +38,25 @@ class NotePages extends React.Component {
     super(props)
 
     this.state = {
+      notes: props.isArchived ? getArchivedNotes() : getActiveNotes(),
       keyword: props.defaultKeyword || '',
+      isArchived: props.isArchived,
     }
 
+    this.onArchiveMoveHandler = this.onArchiveMoveHandler.bind(this)
+    this.onDeleteHandler = this.onDeleteHandler.bind(this)
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this)
+    this.getNotes = this.getNotes.bind(this)
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.isArchived !== state.isArchived) {
+      return {
+        isArchived: props.isArchived,
+        notes: props.isArchived ? getArchivedNotes() : getActiveNotes(),
+      }
+    }
+    return null
   }
 
   onKeywordChangeHandler(event) {
@@ -47,20 +66,36 @@ class NotePages extends React.Component {
     this.props.keywordChange(keyword)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (
-      nextProps.isArchived === this.props.isArchived &&
-      nextState.keyword === this.state.keyword
-    ) {
-      return false
+  getNotes() {
+    return this.props.isArchived ? getArchivedNotes() : getActiveNotes()
+  }
+
+  onDeleteHandler(id) {
+    deleteNote(id)
+
+    this.setState(() => {
+      return {
+        notes: this.getNotes(),
+      }
+    })
+  }
+
+  onArchiveMoveHandler(id) {
+    if (this.props.isArchived) {
+      unarchiveNote(id)
+    } else {
+      archiveNote(id)
     }
-    return true
+
+    this.setState(() => {
+      return {
+        notes: this.getNotes(),
+      }
+    })
   }
 
   render() {
-    const { keyword } = this.state
-    const notes = this.props.isArchived ? getArchivedNotes() : getActiveNotes()
-
+    const { keyword, notes } = this.state
     const filteredNotes = keyword
       ? getNoteByKeyword(notes, keyword, this.props.isArchived)
       : notes
@@ -74,7 +109,11 @@ class NotePages extends React.Component {
           />
 
           <h2>Catatan Aktif</h2>
-          <NotesList notes={filteredNotes} />
+          <NotesList
+            notes={filteredNotes}
+            onDelete={this.onDeleteHandler}
+            onArchiveMove={this.onArchiveMoveHandler}
+          />
         </div>
       </>
     )
