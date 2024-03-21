@@ -8,7 +8,9 @@ function NoteItemContent({ title, createdAt, body, id }) {
 
   return (
     <div className='note-item__content'>
-      <h3 className='note-item__title' onClick={() => navigate(`/note/${id}`)}>{title}</h3>
+      <h3 className='note-item__title'>
+        <a href={`/note/${id}`}>{title}</a>
+      </h3>
       <p className='note-item__date'>{showFormattedDate(createdAt)}</p>
       <p className='note-item__body'>{body}</p>
     </div>
